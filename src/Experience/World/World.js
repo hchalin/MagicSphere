@@ -15,7 +15,7 @@ export default class World {
     this.resources.on("ready", () => {
       // Setup
       // this.floor = new Floor();
-      // this.fox = new Fox();
+      this.fox = new Fox();
       // this.magicSphere = new MagicSphere();
       this.metalFloor = new MetalFloor();
       this.environment = new Environment();
@@ -25,7 +25,6 @@ export default class World {
   update() {
     // this is getting called every frame if the fox is in the scene
     if (this.fox) {
-      console.log("the fox is in the scene");
       this.fox.update();
     }
   }
