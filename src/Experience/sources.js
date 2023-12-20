@@ -27,9 +27,10 @@ export default [
     path: "models/Fox/glTF-Binary/Fox.glb",
     // path: "models/Fox/glTF/Fox.gltf",
   },
-  // {
-  //   name: "magicSphere",
-  //   type: "gltfModel",
-  //   path: "models/magicball-2.glb",
-  // },
+  {
+    name: "magicSphere",
+    type: "gltfModel",
+    // type: "dracoCompressedModel",
+    path: "models/SceneModApp.glb",
+  },
 ];
