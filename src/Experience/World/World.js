@@ -15,8 +15,8 @@ export default class World {
     this.resources.on("ready", () => {
       // Setup
       // this.floor = new Floor();
-      this.fox = new Fox();
-      // this.magicSphere = new MagicSphere();
+      // this.fox = new Fox();
+      this.magicSphere = new MagicSphere();
       this.metalFloor = new MetalFloor();
       this.environment = new Environment();
     });

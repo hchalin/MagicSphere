@@ -10,6 +10,7 @@ export default class MagicSphere {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.debug = this.experience.debug;
+    this.camera = this.experience.camera;
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("MagicSphere");
@@ -24,55 +25,56 @@ export default class MagicSphere {
     this.setRing();
     // this.addRing();
 
+    // Book
+    this.setBooks();
+    this.addBooks();
+
     // books
-    this.setTableTop();
-    this.addTableTop();
+    // this.setTableTop();
+    // this.addTableTop();
   }
 
   setModels() {
     this.model = this.resource.scene;
-    // console.log(this.model.children);
+    console.log(this.model);
   }
 
   setRing() {
     this.model.traverse((child) => {
-      if (child.name === "Ring") {
+      if (child.name === "RingModApp") {
         this.ring = child;
       }
     });
-    this.ring.scale.x = 30;
-    this.ring.scale.y = 30;
-    this.ring.scale.z = 30;
+    console.log(this.ring);
+    this.ring.scale.x = 40;
+    this.ring.scale.y = 40;
+    this.ring.scale.z = 40;
+    this.ring.position.y = 0.5;
+    // this.ring.material.wireframe = true
 
-    this.ring.position.y += 0.2;
+    // this.ring.position.y += 0.2;
   }
 
   addRing() {
     this.scene.add(this.ring);
   }
 
-  setTableTop() {
+  setBooks() {
+    // Dont worry about the books right now
     this.model.traverse((child) => {
-      if (child.name === "TableTop") {
-        this.tableTop = child;
+      if (child.name === "Book_WarnModApp") {
+        this.bookWarn = child;
       }
     });
-
-    this.tableTop.rotation.x = 0;
-    if (this.debug.active && this.tableTop) {
-      console.log("debug is active and the table top is in the scene");
-
-      this.debugFolder
-        .add(this.tableTop.rotation, "x")
-        .name("rotationX")
-        .min(-1)
-        .max(1)
-        .step(0.0001);
-    }
+    this.bookWarn.material.wireframe = true
+    this.bookWarn.scale.x = 40;
+    this.bookWarn.scale.y = 40;
+    this.bookWarn.scale.z = 40;
   }
-  addTableTop() {
-    this.scene.add(this.tableTop);
-  }
+
+  // addBooks() {
+  //   this.scene.add(this.bookWarn);
+  // }
 
   setAnimation() {
     // handle animations
