@@ -16,7 +16,7 @@ export default class World {
       // Setup
       // this.floor = new Floor();
       // this.fox = new Fox();
-      this.magicSphere = new MagicSphere();
+      // this.magicSphere = new MagicSphere();
       this.metalFloor = new MetalFloor();
       this.environment = new Environment();
     });

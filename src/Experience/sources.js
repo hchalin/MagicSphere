@@ -26,9 +26,9 @@ export default [
     type: "gltfModel",
     path: "models/Fox/glTF/Fox.gltf",
   },
-  {
-    name: "magicSphere",
-    type: "gltfModel",
-    path: "models/magicball-2.glb",
-  },
+  // {
+  //   name: "magicSphere",
+  //   type: "gltfModel",
+  //   path: "models/magicball-2.glb",
+  // },
 ];
