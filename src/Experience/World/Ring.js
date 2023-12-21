@@ -4,6 +4,7 @@ import { TextureLoader } from "three";
 // import {SubdivisionModifier} from 'three/examples/jsm/modifiers/'
 import Experience from "../Experience";
 import Renderer from "../Renderer";
+import Resources from "../Utils/Resources";
 
 export default class Ring {
   constructor() {
@@ -34,36 +35,40 @@ export default class Ring {
         this.ring = child;
       }
     });
-    // normalMap
-    console.log(this.ring.material.normalMap);
-    // roughnessMap
-    console.log(this.ring.material.roughnessMap);
-    this.roughnessMap = this.ring.material.roughnessMap;
-    const roughnessMap = new THREE.TextureLoader().load(this.roughnessMap);
+
+    const greasyPlateTexture = this.resources.items.greasyPlate;
+
+
+    const standardMaterial = this.ring.material;
     const customMaterial = new THREE.MeshStandardMaterial({
       name: "custom",
       color: "#FFDD95",
       metalness: 1,
-      roughness: 0.2,
-      // roughnessMap: roughnessMap,
+      roughnessMap: greasyPlateTexture,
+      roughness: 0.9,
     });
-    const standardMaterial = this.ring.material;
+    // Set texture wrap properties
+    greasyPlateTexture.wrapS = THREE.RepeatWrapping;
+    greasyPlateTexture.wrapT = THREE.RepeatWrapping; // wrap around inside of ring
+    greasyPlateTexture.repeat.set(1, 1);
+    console.log(this.ring.material);
+
+
 
     this.ring.castShadow = true;
-    // this.ring.recieveShadow = true;
+    this.ring.recieveShadow = true;
 
-    this.ring.geometry.computeVertexNormals(); // doesnt work
+    // scale and position
     this.ring.scale.x = 40;
     this.ring.scale.y = 40;
     this.ring.scale.z = 40;
     this.ring.position.y = 0.5;
-    this.ring.geometry;
-    // this.ring.material.wireframe = true
-    // this.ring.material = new THREE.MeshBasicMaterial({ color: 'red' });
+    this.ring.position.x = 0;
+    this.ring.position.z = 0;
 
-    //Use custom material
     let useCustomMaterial = false;
-
+    this.ring.material = customMaterial;
+    // this.ring.material = standardMaterial;
     //debug
     if (this.debug.active) {
       //material folder
@@ -80,6 +85,7 @@ export default class Ring {
           this.ring.material = useCustomMaterial
             ? customMaterial
             : standardMaterial;
+
           console.log(this.ring.material.name);
         });
       ringMaterialFolder.close();
@@ -99,7 +105,7 @@ export default class Ring {
           .max(1)
           .step(0.01);
       }
-      this.debugFolder.close();
+      // this.debugFolder.close();
     }
     // Add the ring to the scene
     this.scene.add(this.ring);
