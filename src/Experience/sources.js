@@ -30,7 +30,16 @@ export default [
   {
     name: "magicSphere",
     type: "gltfModel",
-    // type: "dracoCompressedModel",
     path: "models/SceneModApp.glb",
+  },
+  {
+    name: "greasyPlate",
+    type: "texture",
+    path: "textures/ring/greasyPlate.png",
+  },
+  {
+    name: "vikingRunes",
+    type: "texture",
+    path: "textures/ring/vikingRunes.png",
   },
 ];
