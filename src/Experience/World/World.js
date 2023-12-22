@@ -3,7 +3,7 @@ import Environment from "./Environment.js";
 import Floor from "./Floor.js";
 import MetalFloor from "./MetalFloor.js";
 import Fox from "./Fox.js";
-import Ring from "./Ring.js";
+import Ring from "./Ring/Ring.js";
 
 export default class World {
   constructor() {
@@ -17,12 +17,10 @@ export default class World {
       // this.floor = new Floor();
       // this.fox = new Fox();
       // this.magicSphere = new MagicSphere();
-      this.ring = new Ring()
+      this.ring = new Ring();
       this.metalFloor = new MetalFloor();
       this.environment = new Environment();
-
     });
-
   }
 
   update() {
