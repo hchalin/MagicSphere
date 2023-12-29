@@ -1,11 +1,6 @@
 import * as THREE from "three";
 import { TextureLoader } from "three";
-// import { SubdivisionModifier } from "three/examples/jsm/modifiers/SubdivisionModifier.js";
-// import {SubdivisionModifier} from 'three/examples/jsm/modifiers/'
 import Experience from "../../Experience";
-import Renderer from "../../Renderer";
-import Resources from "../../Utils/Resources";
-
 
 export default class Ring {
   constructor() {
@@ -39,9 +34,9 @@ export default class Ring {
 
     const greasyPlateTexture = this.resources.items.greasyPlate;
     const vikingRunesTexture = this.resources.items.vikingRunes;
-    const vikingRunesShader = new THREE.ShaderMaterial({
+    const vikingRunesShaderTexture = new THREE.ShaderMaterial({
       uniforms: {
-        normalMap: { value: vikingRunesTexture },
+        uTexture: { value: vikingRunesTexture },
       },
       // vertexShader:
     });
@@ -58,11 +53,12 @@ export default class Ring {
       // normalScale: new THREE.Vector2(1, 1),
       emissive: "#7CFFFF", // look at making this a shaderMaterial???
       emissiveIntensity: 1,
+      // emissiveMap: vikingRunesShaderTexture, 
       emissiveMap: vikingRunesTexture,
     });
-    // Set texture wrap properties
+    // Set texture wrap and repeat properties
     greasyPlateTexture.wrapS = THREE.RepeatWrapping;
-    greasyPlateTexture.wrapT = THREE.RepeatWrapping; // wrap around inside of ring
+    greasyPlateTexture.wrapT = THREE.RepeatWrapping;
     greasyPlateTexture.repeat.set(1, 1);
 
     this.ring.castShadow = true;
@@ -78,7 +74,8 @@ export default class Ring {
     this.ring.position.set(0, 0.4, 0);
 
     let useCustomMaterial = true;
-    this.ring.material = customMaterial;
+    // this.ring.material = customMaterial;
+    this.ring.material = vikingRunesShaderTexture;
     // this.ring.material = standardMaterial;
     //debug
     if (this.debug.active) {
@@ -115,6 +112,7 @@ export default class Ring {
           .max(1)
           .step(0.01);
       }
+      // closed by default
       // this.debugFolder.close();
     }
     // Add the ring to the scene
