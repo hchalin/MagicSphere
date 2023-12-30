@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import Experience from "./Experience.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+
 
 export default class Renderer {
   constructor() {

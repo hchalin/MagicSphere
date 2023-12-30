@@ -1,0 +1,3 @@
+# Ring approaches
+
+1. 

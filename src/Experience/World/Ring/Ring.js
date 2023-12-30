@@ -31,18 +31,26 @@ export default class Ring {
         this.ring = child;
       }
     });
+    // layers test
 
+    //Textures
     const greasyPlateTexture = this.resources.items.greasyPlate;
     const vikingRunesTexture = this.resources.items.vikingRunes;
-    const vikingRunesShaderTexture = new THREE.ShaderMaterial({
+    vikingRunesTexture.flipY = false;
+    // Set texture wrap and repeat properties
+    greasyPlateTexture.wrapS = THREE.RepeatWrapping;
+    greasyPlateTexture.wrapT = THREE.RepeatWrapping;
+    greasyPlateTexture.repeat.set(1, 1);
+
+    //Materials
+    const standardMaterial = this.ring.material;
+    const vikingRunesShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uTexture: { value: vikingRunesTexture },
       },
       // vertexShader:
     });
-    vikingRunesTexture.flipY = false;
 
-    const standardMaterial = this.ring.material;
     const customMaterial = new THREE.MeshStandardMaterial({
       name: "custom",
       color: "#FFDD95",
@@ -53,14 +61,14 @@ export default class Ring {
       // normalScale: new THREE.Vector2(1, 1),
       emissive: "#7CFFFF", // look at making this a shaderMaterial???
       emissiveIntensity: 1,
-      // emissiveMap: vikingRunesShaderTexture, 
+      // emissiveMap: vikingRunesShaderTexture,
       emissiveMap: vikingRunesTexture,
     });
-    // Set texture wrap and repeat properties
-    greasyPlateTexture.wrapS = THREE.RepeatWrapping;
-    greasyPlateTexture.wrapT = THREE.RepeatWrapping;
-    greasyPlateTexture.repeat.set(1, 1);
 
+    // Combine shader material and custom material
+    const multiMaterial = [customMaterial, vikingRunesShaderMaterial];
+
+    //Shadows
     this.ring.castShadow = true;
     this.ring.recieveShadow = true;
 
@@ -74,8 +82,8 @@ export default class Ring {
     this.ring.position.set(0, 0.4, 0);
 
     let useCustomMaterial = true;
-    // this.ring.material = customMaterial;
-    this.ring.material = vikingRunesShaderTexture;
+    this.ring.material = customMaterial;
+    // this.ring.material = vikingRunesShaderTexture;
     // this.ring.material = standardMaterial;
     //debug
     if (this.debug.active) {
